@@ -40,6 +40,12 @@ def lambda_handler(event, context):
             body=f'Malformed body: {e}'
         )
     
+    if not transaction_request:
+        return generate_http_response(
+            status_code=500,
+            body='Malformed body. See the logs for details.'
+        )
+
     # Build Transaction and send to Payfast
     transaction = Transaction(
         **dataclasses.asdict(transaction_request),
