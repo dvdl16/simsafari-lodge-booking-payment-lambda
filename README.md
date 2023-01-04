@@ -21,16 +21,6 @@ cd ../../../../
 zip -g payments.zip *.py
 aws lambda update-function-code --function-name MyLambdaFunction --zip-file fileb://payments.zip
 
-# Set env variables
-aws lambda update-function-configuration --function-name SimSafari_Lodge_Booking_Payment_API \
-    --environment "Variables={\
-    APP_PAYFAST_MERCHANT_ID=11165590,\
-    APP_PAYFAST_MERCHANT_KEY=19cvztvd67enc,\
-    APP_PAYFAST_PASSPHRASE=Amarokffu68115-,\
-    APP_PAYFAST_ONSITE_URL=https://www.payfast.co.za/onsite/process,\
-    APP_PAYFAST_EMAIL_CONFIRMATION=1,\
-    APP_PAYFAST_CONFIRMATION_ADDRESS=dirk@laarse.co.za\
-    }"
 ```
 
 Set the environment variables. The examples below are for [Payfast's Sandbox environment](https://support.payfast.co.za/portal/en/kb/articles/how-do-i-make-test-payments-in-sandbox-mode)
