@@ -11,4 +11,11 @@ jobs:
     - name: Report number of open PRs to Uptime Kuma
       run: |
         pr_count=$(curl -s https://api.github.com/repos/dvdl16/simsafari-lodge-booking-payment-lambda/pulls | jq length)
-        curl -X GET "${{ secrets.UPTIME_KUMA_URL }}?status=up&ping=$pr_count&msg=OK"
+        acceptable="5"
+        status="down"
+        msg="More%20than%205%20PRs%20are%20open"
+        if (( $(echo "$pr_count < $acceptable" | bc -l) )); then
+           status="up"
+           msg="OK"
+        fi
+        curl -s GET "${{ secrets.UPTIME_KUMA_URL }}?status=$status&ping=$pr_count&msg=$msg"
