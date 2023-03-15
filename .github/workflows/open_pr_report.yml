@@ -1,0 +1,12 @@
+name: "Report on open PRs"
+on:
+  schedule:
+  - cron: "0 0 * * 0"
+
+jobs:
+  curl:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Report number of open PRs to Uptime Kuma
+      run: |
+        curl -X GET "${{ secrets.UPTIME_KUMA_URL }}?status=up&ping=1&msg=OK"
